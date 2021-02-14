@@ -1,0 +1,65 @@
+{% extends 'inc/base.html' %}
+{% block content %}
+
+    <div class="container">
+        <div>
+            <div class="row my-5" style="width: 100%;">
+                <div class="col-12 py-0 d-flex justify-content-center align-items-center">
+                    <div class="my-form p-5">
+                        <h3 class="text-info">Enter details!</h3>
+                        <form autocomplete="off" style="text-align:center; margin-top: 20px;" action="" method="POST">
+                            {% csrf_token %}
+                            <input class="field form-control" name="persEcm" type="text" placeholder="PERsEcmNumber" required>
+                            <input class="field form-control" name="pltxNm" type="text" placeholder="NAME" required>
+                            
+                            <button class="btn btn-block btn-info" type="submit" style="height: 45px;">Submit</button>        
+                        </form>
+        
+                    </div>
+                </div>
+            </div> 
+
+           {% if values %}
+
+               <div class="card">
+                <!--tips: add .text-center,.text-right to the .card to change card text alignment-->
+                <div class="card-body">
+                    <table class="table table-borderless" style="border-radius: 10px;">
+                        <thead>
+                        <tr>
+                            <th style="width: 20%;">CERTIFIEDKEY</th>
+                            <th style="width: 20%;">PERsEcmNumber</th>
+                            <th style="width: 10%;">Name</th>
+                            <th style="width: 10%;">Status</th>
+                            <th style="width: 40%;">Message</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ values.crkyCn }}</td>
+                            <td>{{ values.persEcm }}</td>
+                            <td>{{ values.pltxNm }}</td>
+                            <td>
+                                {% if status == 1 %}
+                                    <i class="material-icons myIco bg-success text-white">done</i>
+                                    
+                                {% else %}
+                                    <i class="material-icons myIco bg-danger text-white">clear</i>
+                                {% endif %}
+                            </td>
+                            <td>{{ msg }}</td>
+                            
+                        </tr>
+                    
+                        </tbody>
+                    </table>
+                </div>
+               </div>
+           
+           {% endif %}
+        </div>
+
+    </div>
+
+{% endblock %}
+
